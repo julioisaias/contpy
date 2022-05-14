@@ -1,4 +1,5 @@
-use csv::{Error, ReaderBuilder};
+use std::{ thread, time };
+use csv::{ Error, ReaderBuilder };
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -25,31 +26,43 @@ struct Record {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+    let v = get_data().await?;
+
+    println!("{:#?}", v);
+
+//    let ten_millis = time::Duration::from_millis(2000);
+//    let now = time::Instant::now();
+
+    Ok(())
+}
+
+
+
+async fn get_data() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
+
     let data = reqwest::get("https://www.contrataciones.gov.py/buscador/licitaciones.csv?nro_nombre_licitacion=&etapas_licitacion[0]=CONV&fecha_desde=&fecha_hasta=&tipo_fecha=&convocante_tipo=&convocante_nombre_codigo=&codigo_contratacion=&catalogo[codigos_catalogo_n4]=&catalogo[codigos_catalogo_n4_label]=&page=&order=&convocante_codigos=&convocante_tipo_codigo=&unidad_contratacion_codigo=")
-        .await?
-        .text()
-        //.json::<HashMap<String, String>>()
-        .await?;
-    //println!("{:#?}", resp);
+    .await?
+    .text()
+    //.json::<HashMap<String, String>>()
+    .await?;
+
 
     let mut reader = ReaderBuilder::new().delimiter(b';').from_reader(data.as_bytes());
 
 
     //let cantidad: usize = reader.records().count(); // cantidad de registros CSV
 
-    let mut licitaciones_actuales: Vec<usize> = Vec::new();
-  
+    let mut current_vec: Vec<usize> = Vec::new();
+
     for record in reader.deserialize() {
         let dd: Record = record?;
-        licitaciones_actuales.push(dd.nro_licitacion);
+        current_vec.push(dd.nro_licitacion);
         //println!("nro_licitacion: {}", dd.nro_licitacion );
     }
 
-    println!("{:#?}", licitaciones_actuales);
-    
+    current_vec.sort();
 
-
-
-
-    Ok(())
+    Ok(current_vec)
 }
+
