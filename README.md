@@ -1,6 +1,6 @@
 ## Contrataciones Públicas
 
-A initial implementation of realtime task for contrataciones written in `Rust`.
+A initial implementation of realtime task for contrataciones written in `Rust`. This gets notifications from the EN CONVOCATORIA stage.
 
 ## Motivation
 There are existing implementations such as using the site's own API, or using the mobile application. However, this approach can help create or automate tasks from anywhere.
