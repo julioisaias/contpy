@@ -1,6 +1,9 @@
-## contrataciones publicas-rs
+## Contrataciones Públicas
 
-A initial implementation of realtime script for contrataciones written in `Rust`.
+A initial implementation of realtime task for contrataciones written in `Rust`.
+
+## Motivation
+There are existing implementations such as using the site's own API, or using the mobile application. However, this approach can help create or automate tasks from any server.
 
 ## How to use
 
@@ -24,9 +27,6 @@ serde = { version = "1", features = ["derive"] }
 ## Disclaimer
 
 There is no relationship with Contrataciones Públicas.
-
-## Motivation
-There are existing implementations such as using the site's own API, or using the mobile application. However, this approach can help create or automate tasks from any server.
 
 ## Contribution
 
