@@ -123,3 +123,8 @@ impl Params {
         )
     }
 }
+
+
+pub fn nuevo() -> String {
+    "oo".to_string()
+}
