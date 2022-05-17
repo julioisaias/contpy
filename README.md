@@ -24,6 +24,11 @@ csv = "1.1"
 serde = { version = "1", features = ["derive"] }
 ```
 
+## How It Works
+Performs an initial data fetch.
+Run a comparison task between current data and previously obtained data
+If there is a new tender, it shows the new tenders that have been found.
+
 ## Disclaimer
 
 There is no relationship with Contrataciones Públicas.
@@ -34,4 +39,4 @@ If you like the project, give it a star, or you can contribute.
 
 ## License
 
-MIT
+Distributed under the MIT License. See LICENSE.txt for more information.
