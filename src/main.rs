@@ -12,17 +12,15 @@ struct Record {
     _etapa_licitacion: String
 }
 
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut v1 = get_data().await?;
-    let verb = time::Duration::from_secs(2); // Every 10 minutes (600 secs)
+    let verb = time::Duration::from_secs(600); // Every 10 minutes (600 secs)
 
     loop {
         let v2 = get_data().await?;
         let (is_new, tenders) = get_compare(v1.clone(), v2.clone());
-
         if is_new {
             println!("[+] HAY NUEVAS LICITACIONES: {:#?}", tenders);
             v1 = v2;
@@ -69,9 +67,7 @@ async fn get_data() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
         let dd: Record = record?;
         current_vec.push(dd.nro_licitacion);
     }
-
     current_vec.sort();
-    //println!("{:#?}", &current_vec);
     Ok(current_vec)
 }
 
