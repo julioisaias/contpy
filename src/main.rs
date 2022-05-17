@@ -32,12 +32,9 @@ struct Record {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
-    let a = module::Params::new();
-
-    println!("URL: {}", a);
-
+ 
     let v1 = get_data().await?;
-    let v2 = vec![1,2,5,6];
+    let v2 = vec![414915,414914,414904];
 
     let is_new = get_compare(v1, v2).0;
     println!("{:#?}", is_new);
@@ -66,9 +63,12 @@ fn get_compare(mut vec1: Vec<usize>, mut vec2: Vec<usize>)-> (bool, Vec<usize>) 
 
 async fn get_data() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
 
-    
+    let url = "https://www.contrataciones.gov.py/";
+    let parameters = module::Params::new();
 
-    let data = reqwest::get("https://www.contrataciones.gov.py/buscador/licitaciones.csv?nro_nombre_licitacion=&etapas_licitacion[0]=CONV&fecha_desde=&fecha_hasta=&tipo_fecha=&convocante_tipo=&convocante_nombre_codigo=&codigo_contratacion=&catalogo[codigos_catalogo_n4]=&catalogo[codigos_catalogo_n4_label]=&page=&order=&convocante_codigos=&convocante_tipo_codigo=&unidad_contratacion_codigo=")
+    let uri = format!("{}{}", url, parameters);
+
+    let data = reqwest::get(uri)
     .await?
     .text()
     .await?;
@@ -82,6 +82,7 @@ async fn get_data() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
     }
 
     current_vec.sort();
+    println!("{:#?}", &current_vec);
     Ok(current_vec)
 }
 
