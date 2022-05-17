@@ -26,7 +26,7 @@ serde = { version = "1", features = ["derive"] }
 
 ## How It Works
 - Performs an initial data fetch.
-- Run a comparison task between current data and previously obtained data
+- Run a comparison task between current data and previously obtained data.
 - If there is a new tender, it shows the new tenders that have been found.
 
 ## Disclaimer
