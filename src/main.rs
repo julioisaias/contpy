@@ -1,8 +1,9 @@
-use std::{ thread, time, collections::HashSet };
-use std::iter::Iterator;
-use std::iter::FromIterator;
-use csv::{ Error, ReaderBuilder };
+use std::{ collections::HashSet };
+use csv::{ ReaderBuilder };
 use serde::Deserialize;
+
+mod params;
+
 
 #[derive(Debug, Deserialize)]
 struct Record {
@@ -32,14 +33,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let v1 = vec![1,2,5,6];
     let v2 = vec![1,2,5,6];
 
-    get_new(v1, v2);
+    let is_new = get_compare(v1, v2).0;
 
+    println!("{:#?}", is_new);
 
     Ok(())
 }
 
 
-fn get_new(mut vec1: Vec<usize>, mut vec2: Vec<usize>)-> Vec<usize> {
+fn get_compare(mut vec1: Vec<usize>, mut vec2: Vec<usize>)-> (bool, Vec<usize>) {
 
     vec1.sort(); // SORT
     vec2.sort();
@@ -49,15 +51,12 @@ fn get_new(mut vec1: Vec<usize>, mut vec2: Vec<usize>)-> Vec<usize> {
 
     let diff: HashSet<_> = w2.difference(&w1).cloned().collect();
 
-    
-    let r = Vec::from_iter(diff);
-    
-    println!("{:#?}", r);
+    let vec = Vec::from_iter(diff);
 
-    return r;
+    let is_diff = if vec.len() > 0 { true } else { false };
+    
+    return (is_diff, vec);
 }
-
-
 
 
 async fn get_data() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
