@@ -3,7 +3,7 @@
 A initial implementation of realtime task for contrataciones written in `Rust`.
 
 ## Motivation
-There are existing implementations such as using the site's own API, or using the mobile application. However, this approach can help create or automate tasks from any server.
+There are existing implementations such as using the site's own API, or using the mobile application. However, this approach can help create or automate tasks from anywhere.
 
 ## How to use
 
