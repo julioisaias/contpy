@@ -35,9 +35,6 @@ trait Fields {
 }
 
 impl Fields for Params {
-    fn nro_nombre_licitacion(&self) -> String {
-        format!("buscador/licitaciones.csv?nro_nombre_licitacion={}", self.nro_nombre_licitacion)
-    }
     fn etapas_licitacion(&self) -> String {
         format!("&etapas_licitacion[0]={}", self.etapas_licitacion)
     }
@@ -80,7 +77,9 @@ impl Fields for Params {
     fn unidad_contratacion_codigo(&self) -> String {
         format!("&unidad_contratacion_codigo={}", self.unidad_contratacion_codigo)
     }
-
+    fn nro_nombre_licitacion(&self) -> String {
+        format!("buscador/licitaciones.csv?nro_nombre_licitacion={}", self.nro_nombre_licitacion)
+    }
 }
 
 impl Params {
