@@ -36,7 +36,7 @@ fn get_compare(mut vec1: Vec<usize>, mut vec2: Vec<usize>)-> (bool, Vec<usize>) 
     vec2.sort();
     let w1: HashSet<usize> = vec1.into_iter().collect(); // Remove duplicates
     let w2: HashSet<usize> = vec2.into_iter().collect();
-    let diff: HashSet<_> = w2.difference(&w1).cloned().collect();
+    let diff: HashSet<_> = w2.difference(&w1).cloned().collect(); // Get difference
     let vec: Vec<usize> = Vec::from_iter(diff);
     let is_diff: bool = if vec.len() > 0 { true } else { false };
 
