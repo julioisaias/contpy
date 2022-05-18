@@ -84,7 +84,7 @@ impl Fields for Params {
 
 impl Params {
     pub fn new() -> String {
-        let p = Params {
+        let p: Params = Params {
             nro_nombre_licitacion: "".to_string(),
             etapas_licitacion: "CONV".to_string(),
             fecha_desde: "".to_string(),
